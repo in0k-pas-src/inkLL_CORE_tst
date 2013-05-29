@@ -24,16 +24,17 @@ type
   protected
     LIST:pointer; //< испытуемое
   protected
-    procedure _list_DESTOY  (var   lst:pTST_inkLL_Node);
-    function  _list_Create  (const Count:NativeInt;     out last:pTST_inkLL_Node):pTST_inkLL_Node;
-    function  _list_clcCount(const lst:pTST_inkLL_Node; out last:pTST_inkLL_Node):NativeInt;
+    procedure _list_DESTOY  (var   lst:pTST_inkLL_Node);                                           virtual; abstract;
+    function  _list_Create  (const Count:NativeInt;     out last:pTST_inkLL_Node):pTST_inkLL_Node; virtual; abstract;
+    function  _list_clcCount(const lst:pTST_inkLL_Node; out last:pTST_inkLL_Node):NativeInt;       virtual; abstract;
   protected
     procedure SetUp;    override;
     procedure TearDown; override;
   PUBLIC //< этим можно пользоваться при ТЕСТАХ
-    procedure TST_node_DESTROY  (Node:pointer);
-    function  TST_node_getNamber(Node:pointer):NativeInt;
-    function  TST_node_getNext  (Node:pointer):pointer;
+    procedure TST_node_DESTROY(      Node:pointer);
+    function  TST_node_Create (Nmbr:NativeInt):pointer;
+    function  TST_node_Namber (const Node:pointer):NativeInt;
+    function  TST_node_Next   (const Node:pointer):pointer;
   end;
 
 implementation
@@ -64,7 +65,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure tTSTCTC_CORE_inkLL._list_DESTOY(var lst:pTST_inkLL_Node);
+{procedure tTSTCTC_CORE_inkLL._list_DESTOY(var lst:pTST_inkLL_Node);
 var tmp:pTST_inkLL_Node;
 begin
     if lst<>nil then begin
@@ -76,11 +77,11 @@ begin
           tmp:=lst;
         end;
     end;
-end;
+end;}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function tTSTCTC_CORE_inkLL._list_Create(const Count:NativeInt; out last:pTST_inkLL_Node):pTST_inkLL_Node;
+{function tTSTCTC_CORE_inkLL._list_Create(const Count:NativeInt; out last:pTST_inkLL_Node):pTST_inkLL_Node;
 var i:NativeInt;
 begin
     result:=NIL;
@@ -94,11 +95,11 @@ begin
             end;
         end;
     end;
-end;
+end;}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function tTSTCTC_CORE_inkLL._list_clcCount(const lst:pTST_inkLL_Node; out last:pTST_inkLL_Node):NativeInt;
+{function tTSTCTC_CORE_inkLL._list_clcCount(const lst:pTST_inkLL_Node; out last:pTST_inkLL_Node):NativeInt;
 begin
     result:=0;
     last  :=nil;
@@ -110,16 +111,16 @@ begin
             last:=pTST_inkLL_Node(last)^.next;
         end;
     end;
-end;
+end;}
 
 //------------------------------------------------------------------------------
 
-function tTSTCTC_CORE_inkLL.TST_node_getNamber(Node:pointer):NativeInt;
+function tTSTCTC_CORE_inkLL.TST_node_Namber(const Node:pointer):NativeInt;
 begin
     result:=pTST_inkLL_Node(node)^.nmbr;
 end;
 
-function tTSTCTC_CORE_inkLL.TST_node_getNext(Node:pointer):pointer;
+function tTSTCTC_CORE_inkLL.TST_node_Next(const Node:pointer):pointer;
 begin
     result:=pTST_inkLL_Node(node)^.next;
 end;
@@ -129,6 +130,11 @@ end;
 procedure tTSTCTC_CORE_inkLL.TST_node_DESTROY(Node:pointer);
 begin
     _node_DST(Node);
+end;
+
+function tTSTCTC_CORE_inkLL.TST_node_Create(Nmbr:NativeInt):pointer;
+begin
+    result:=_node_CRT(Nmbr,NIL);
 end;
 
 end.
