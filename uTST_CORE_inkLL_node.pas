@@ -65,56 +65,6 @@ end;
 
 //------------------------------------------------------------------------------
 
-{procedure tTSTCTC_CORE_inkLL._list_DESTOY(var lst:pTST_inkLL_Node);
-var tmp:pTST_inkLL_Node;
-begin
-    if lst<>nil then begin
-        tmp:=lst;
-        while tmp<>nil do begin
-          lst:=tmp^.next;
-         _node_DST(tmp);
-          //--
-          tmp:=lst;
-        end;
-    end;
-end;}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-{function tTSTCTC_CORE_inkLL._list_Create(const Count:NativeInt; out last:pTST_inkLL_Node):pTST_inkLL_Node;
-var i:NativeInt;
-begin
-    result:=NIL;
-    last  :=NIL;
-    if Count>0 then begin;
-        last  :=_node_CRT(Count-1,NIL);
-        result:=last;
-        if Count>1 then begin
-            for i:= (Count-2) downto (0) do begin
-               result:=_node_CRT(i,result);
-            end;
-        end;
-    end;
-end;}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-{function tTSTCTC_CORE_inkLL._list_clcCount(const lst:pTST_inkLL_Node; out last:pTST_inkLL_Node):NativeInt;
-begin
-    result:=0;
-    last  :=nil;
-    if lst<>nil then begin
-        result:=1;
-        last  :=lst;
-        while pTST_inkLL_Node(last)^.next<>nil do begin
-            inc (result);
-            last:=pTST_inkLL_Node(last)^.next;
-        end;
-    end;
-end;}
-
-//------------------------------------------------------------------------------
-
 function tTSTCTC_CORE_inkLL.TST_node_Namber(const Node:pointer):NativeInt;
 begin
     result:=pTST_inkLL_Node(node)^.nmbr;
