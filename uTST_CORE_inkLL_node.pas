@@ -37,7 +37,17 @@ type
     function  TST_node_Next   (const Node:pointer):pointer;
   end;
 
+
+procedure TST_inkLL_Node_DESTRoY(const Node:pointer);
+
 implementation
+
+procedure TST_inkLL_Node_DESTRoY(const Node:pointer);
+begin
+    dispose(pTST_inkLL_Node(Node))
+end;
+
+//==============================================================================
 
 procedure tTSTCTC_CORE_inkLL.SetUp;
 begin
@@ -53,7 +63,7 @@ end;
 
 procedure tTSTCTC_CORE_inkLL._node_DST(Node:pTST_inkLL_Node);
 begin
-    dispose(Node)
+    TST_inkLL_Node_DESTRoY(Node);
 end;
 
 function tTSTCTC_CORE_inkLL._node_CRT(Nmbr:NativeInt; Next:pTST_inkLL_Node):pTST_inkLL_Node;
