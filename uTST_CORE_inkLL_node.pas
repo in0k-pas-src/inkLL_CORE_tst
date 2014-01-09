@@ -31,7 +31,7 @@ type
     procedure SetUp;    override;
     procedure TearDown; override;
   PUBLIC //< этим можно пользоваться при ТЕСТАХ
-    procedure TST_node_DESTROY(      Node:pointer);
+    procedure TST_node_DESTROY(const Node:pointer);
     function  TST_node_Create (Nmbr:NativeInt):pointer;
     function  TST_node_Namber (const Node:pointer):NativeInt;
     function  TST_node_Next   (const Node:pointer):pointer;
@@ -87,7 +87,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure tTSTCTC_CORE_inkLL.TST_node_DESTROY(Node:pointer);
+procedure tTSTCTC_CORE_inkLL.TST_node_DESTROY(const Node:pointer);
 begin
     _node_DST(Node);
 end;
